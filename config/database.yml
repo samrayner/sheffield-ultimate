@@ -1,0 +1,22 @@
+development:
+  adapter: postgresql
+  encoding: unicode
+  database: sheffield_ultimate_development
+  pool: 5
+  username: postgres
+  password:
+  host: localhost
+  port: 5432
+
+test:
+  min_messages: WARNING
+  adapter: postgresql
+  encoding: unicode
+  database: sheffield_ultimate_test
+  pool: 5
+  username: postgres
+  password:
+  host: localhost
+  port: 5432
+
+production:

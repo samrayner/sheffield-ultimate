@@ -1,0 +1,15 @@
+%nav.navbar.navbar-inverse.navbar-static-top{ role: "navigation" }
+  .container
+    .navbar-header
+      %button.navbar-toggle{ "data-toggle" => "collapse", "data-target" => ".navbar-collapse"}
+        %span.sr-only Toggle navigation
+        %span.icon-bar
+        %span.icon-bar
+        %span.icon-bar
+      = link_to @cms_site.label, "/", class: "navbar-brand"
+
+    .collapse.navbar-collapse
+      %ul.nav.navbar-nav
+        - @cms_site.pages.published.each do |page|
+          %li{ class: "#{"active" if page == @cms_page}"}
+            = link_to page.label, page.full_path

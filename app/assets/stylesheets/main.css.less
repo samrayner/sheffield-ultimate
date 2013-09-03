@@ -1,0 +1,151 @@
+/* Vars/Mixins
+================================================== */
+
+@red: #d00;
+@darkRed: darken(@red, 10);
+
+.clearfix {
+  &:before,
+  &:after {
+    content: " ";
+    display: table;
+  }
+  &:after {
+    clear: both;
+  }
+}
+
+.image-replace {
+  display: inline-block;
+  text-indent: -9999px;
+  overflow: hidden;
+}
+
+/* Headings
+================================================== */
+
+h1 {
+  font-size: 1.8em;
+}
+
+h2 {
+  font-size: 1.6em;
+}
+
+h3 {
+  font-size: 1.4em;
+}
+
+/* Global
+================================================== */
+
+body {
+  color: #333;
+  background-color: #fcfcfc;
+}
+
+.container {
+  max-width: 1000px;
+}
+
+.main {
+  padding-top: 2em;
+  padding-bottom: 4em;
+}
+
+/* Navbar
+================================================== */
+
+.navbar {
+  margin-bottom: 0;
+  border: none;
+}
+
+/* Banner
+================================================== */
+
+.banner {
+  display: block;
+  position: relative;
+  width: 100%;
+
+  .stretcher {
+    padding-top: 14%;
+  }
+
+  h1 {
+    .image-replace;
+    margin: 0;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: image-url("banner.jpg") repeat 50% 50%;
+    background-size: cover;
+    box-shadow: inset 0 0 10px rgba(0,0,0,0.2);
+  }
+}
+
+/* Results
+================================================== */
+
+#results {
+  table {
+    caption {
+      display: none;
+    }
+
+    td:hover, th.trace {
+      background-color: #ffd;
+    }
+  }
+
+  #misc-results {
+    &.collapsed {
+      table {
+        display: none;
+      }
+
+      h1 {
+        color: @red;
+        text-decoration: underline;
+        font-size: 1em;
+        font-weight: normal;
+        cursor: pointer;
+
+        &:hover {
+          color: @darkRed;
+        }
+
+        &::after {
+          content: "\2026";
+        }
+      }
+    }
+  }
+}
+
+/* Calendar
+================================================== */
+
+.fc-event {
+  background-color: @red;
+  border-color: @red;
+}
+
+.fc-text-arrow {
+  line-height: 0.8;
+}
+
+.fc-event-time {
+  margin-right: 0.3em;
+}
+
+a.fc-event:hover {
+  color: white;
+
+  .fc-event-inner {
+    background-color: rgba(0,0,0,0.2);
+  }
+}
