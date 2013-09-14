@@ -10,10 +10,10 @@
     = "#{@cms_page.label} ~ " if @cms_page.label
     = @cms_site.label
 
-  = stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true
-  = javascript_include_tag "application", "data-turbolinks-track" => true
+  = stylesheet_link_tag "application", media: "all"
+  = javascript_include_tag "application"
 
-%body{ id: @cms_page.slug ? @cms_page.slug : "home" }
+%body{ id: @cms_page.slug || "home" }
   = render partial: "shared/navigation"
 
   %header.banner
@@ -21,4 +21,5 @@
     %h1= @cms_site.label
 
   .main.container
+    = render "shared/flash_messages"
     = yield

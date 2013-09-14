@@ -12,7 +12,6 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require turbolinks
 //= require twitter/bootstrap
 //= require vendor_javascripts
 //= require_tree .
