@@ -1,8 +1,9 @@
 = simple_form_for @email do |f|
-  = f.input :name, required: true, input_html: { autofocus: true }
-  = f.input :email, required: true
-  = f.input :message, as: :text, required: true, input_html: { rows: 10 }
+  = f.input :name, input_html: { autofocus: true }
+  = f.input :email
+  = f.input :message, as: :text, input_html: { rows: 10 }
 
   .hide
-    = f.input :nickname, hint: "Leave this blank!"
+    = f.input :first_name, hint: "Leave this blank!"
+
   = f.button :submit, "Send", class: "btn btn-danger"

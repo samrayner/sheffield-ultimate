@@ -20,7 +20,7 @@ describe EmailsController do
 
   describe :create do
     before :all do
-      @params = { "name" => "Sam Rayner", "email" => "sam@example.com", "message" => "Hello", "nickname" => "" }
+      @params = { "name" => "Sam Rayner", "email" => "sam@example.com", "message" => "Hello" }
     end
 
     it "returns http success" do
@@ -37,13 +37,13 @@ describe EmailsController do
     it "delivers the email" do
       email = Email.new(@params)
       Email.stub(:new).and_return(email)
-      email.should_receive(:deliver)
+      email.should_receive(:submit)
       post :create, email: @params
     end
 
     it "sets a success flash message" do
       post :create, email: @params
-      flash[:success].should include("Thank you")
+      flash[:success].should match(/thank you/i)
     end
 
     it "redirects to the contact page" do
@@ -51,35 +51,32 @@ describe EmailsController do
       response.should redirect_to new_email_path
     end
 
-    context "delivery failure" do
+    context "spam" do
       before :each do
-        @email = Email.new(@params)
-        @email.stub(:deliver).and_return(false)
-        Email.stub(:new).with(@params).and_return(@email)
-        post :create, email: @params
+        spam_params = @params
+        spam_params["first_name"] = "Toast"
+        post :create, email: spam_params
       end
 
-      it "sets a flash error message" do
-        flash[:error].should include("could not be delivered")
-      end
-
-      it "renders the email form" do
+      it "should set render the form" do
         response.should render_template("emails/_form")
       end
     end
 
-    context "spam" do
+    context "delivery failure" do
       before :each do
-        params = { "name" => "Sam Rayner", "email" => "sam@example.com", "message" => "Hello", "nickname" => "Toast" }
-        @email = Email.new(params)
-        post :create, email: params
+        @email = Email.new(@params)
+        @email.stub(:submit).and_return(false)
+        Email.stub(:new).with(@params).and_return(@email)
+        Email.stub(:attributes).and_return([])
+        post :create, email: @params
       end
 
-      it "sets a flash error message" do
-        flash[:error].should include("could not be delivered")
+      it "should set the flash" do
+        flash[:error].should match(/could not be delivered/i)
       end
 
-      it "renders the email form" do
+      it "should set render the form" do
         response.should render_template("emails/_form")
       end
     end

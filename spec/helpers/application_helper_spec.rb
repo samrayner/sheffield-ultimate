@@ -20,4 +20,10 @@ describe ApplicationHelper do
       nav_link("Title", "not_path").should == '<li class=""><a href="not_path">Title</a></li>'
     end
   end
+
+  describe :html_obfuscate do
+    it "should encode a string correctly" do
+      html_obfuscate("info@sheffieldultimate.co.uk").should == "&#105;&#110;&#102;&#111;&#64;&#115;&#104;&#101;&#102;&#102;&#105;&#101;&#108;&#100;&#117;&#108;&#116;&#105;&#109;&#97;&#116;&#101;&#46;&#99;&#111;&#46;&#117;&#107;"
+    end
+  end
 end

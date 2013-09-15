@@ -1,4 +1,6 @@
 class EmailsController < ApplicationController
+  include ApplicationHelper
+
   def new
     @email = Email.new
     render cms_page: "/contact"
@@ -6,16 +8,17 @@ class EmailsController < ApplicationController
 
   def create
     @email = Email.new(params[:email])
-    @email.request = request
 
-    if @email.deliver
-      flash[:success] = "Thank you for your message. We'll respond as soon as we can."
-      redirect_to(new_email_path)
-    else
-      if @email.errors.keys.empty?
-        flash.now[:error] = "Sorry, your email could not be delivered."
+    if @email.valid?
+      if @email.submit
+        flash[:success] = "Thank you for your message. We'll respond as soon as we can."
+        return redirect_to(new_email_path)
+      else
+        email = html_obfuscate("info@sheffieldultimate.com")
+        flash[:error] = "Sorry, your message could not be delivered. Please email <a href=\"mailto:#{email}\">#{email}</a>.".html_safe
       end
-      render cms_page: "/contact"
     end
+
+    render cms_page: "/contact"
   end
 end

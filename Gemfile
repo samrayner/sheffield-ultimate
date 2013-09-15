@@ -1,7 +1,6 @@
 source 'https://rubygems.org'
 
 gem 'simple_form', github: 'plataformatec/simple_form'
-gem 'mail_form', github: 'plataformatec/mail_form'
 
 gem 'rails', '4.0.0'
 gem 'pg'
@@ -15,8 +14,13 @@ gem 'less-rails'
 gem 'haml-rails'
 
 group :test, :development do
+  gem 'factory_girl_rails', '~> 4.2'
   gem 'simplecov', require: false
   gem 'rspec-rails', '~> 2.14'
+end
+
+group :development do
+  gem 'letter_opener'
 end
 
 group :test do

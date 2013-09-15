@@ -1,0 +1,14 @@
+!!! 5
+%html
+%head
+  %meta{ charset: "utf-8" }
+%body
+  .name
+    %strong Name:
+    = @name
+  .email
+    %strong Email:
+    = mail_to @email
+  .message
+    = simple_format(@message, {}, sanitize: false)
+    

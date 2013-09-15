@@ -27,12 +27,12 @@ describe "Emails" do
     page.body.should have_content("is invalid")
   end 
 
-  it "does not deliver a message with a missing email" do 
+  it "does not deliver a message with an invalid email" do 
     visit new_email_path 
     fill_in 'Name', with: 'Sam Rayner' 
     fill_in 'Message', with: 'What a great website.' 
     click_button 'Send' 
-    page.body.should have_content("can't be blank")
+    page.body.should have_content("is invalid")
   end 
 
   it "does not deliver spam" do
@@ -40,8 +40,8 @@ describe "Emails" do
     fill_in 'Name', with: 'Sam Rayner' 
     fill_in 'Email', with: 'spammer@spammyjunk.com' 
     fill_in 'Message', with: "All the junk you'll never need." 
-    fill_in 'Nickname', with: 'Want to buy some boots?' 
+    fill_in 'First name', with: 'Want to buy some gold?' 
     click_button 'Send' 
-    page.body.should have_content('could not be delivered')
+    page.body.should have_content('must be blank')
   end
 end
