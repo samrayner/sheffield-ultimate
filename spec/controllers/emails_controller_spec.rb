@@ -19,7 +19,7 @@ describe EmailsController do
   end
 
   describe :create do
-    before :all do
+    before do
       @params = { "name" => "Sam Rayner", "email" => "sam@example.com", "message" => "Hello" }
     end
 
@@ -52,7 +52,7 @@ describe EmailsController do
     end
 
     context "spam" do
-      before :each do
+      before do
         spam_params = @params
         spam_params["first_name"] = "Toast"
         post :create, email: spam_params
@@ -64,15 +64,14 @@ describe EmailsController do
     end
 
     context "delivery failure" do
-      before :each do
-        @email = Email.new(@params)
-        @email.stub(:submit).and_return(false)
-        Email.stub(:new).with(@params).and_return(@email)
-        Email.stub(:attributes).and_return([])
+      before do
+        email = Email.new(@params)
+        email.stub(:submit).and_return(false)
+        Email.stub(:new).with(@params).and_return(email)
         post :create, email: @params
       end
 
-      it "should set the flash" do
+      it "sets an error flash message" do
         flash[:error].should match(/could not be delivered/i)
       end
 

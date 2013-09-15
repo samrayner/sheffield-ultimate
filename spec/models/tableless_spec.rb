@@ -2,7 +2,7 @@ include ActiveModel::Lint::Tests
 
 describe Tableless do
   describe :initialize do
-    before :all do
+    before do
       class Person < Tableless
         attr_accessor :name
       end

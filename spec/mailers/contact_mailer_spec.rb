@@ -1,7 +1,7 @@
 require "spec_helper"
 
 describe ContactMailer do
-  before :all do
+  before do
     @email = FactoryGirl.build(:email)
     @mailer = ContactMailer.contact_email(@email)
   end

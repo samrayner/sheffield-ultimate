@@ -15,7 +15,7 @@ describe Email do
   end
 
   describe "initializing with parameters" do
-    before :all do
+    before do
       @params = { name: "Sam Rayner", email: "test@example.com", message: "Hello" }
       @email = Email.new(@params)
     end
