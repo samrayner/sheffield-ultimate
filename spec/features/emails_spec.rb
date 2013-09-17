@@ -27,12 +27,20 @@ describe "Emails" do
     page.body.should have_content("is invalid")
   end 
 
-  it "does not deliver a message with an invalid email" do 
+  it "does not deliver a message with a blank email" do 
     visit new_email_path 
     fill_in 'Name', with: 'Sam Rayner' 
     fill_in 'Message', with: 'What a great website.' 
     click_button 'Send' 
-    page.body.should have_content("is invalid")
+    page.body.should have_content("can't be blank")
+  end 
+
+  it "does not deliver a message with a blank message" do 
+    visit new_email_path 
+    fill_in 'Name', with: 'Sam Rayner' 
+    fill_in 'Email', with: 'sam@example.com' 
+    click_button 'Send' 
+    page.body.should have_content("can't be blank")
   end 
 
   it "does not deliver spam" do

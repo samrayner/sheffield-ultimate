@@ -12,6 +12,7 @@ gem 'comfortable_mexican_sofa', '~> 1.9.0'
 gem 'less-rails-bootstrap'
 gem 'less-rails'
 gem 'haml-rails'
+gem 'valid_email'
 
 group :test, :development do
   gem 'factory_girl_rails', '~> 4.2'
