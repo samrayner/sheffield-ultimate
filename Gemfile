@@ -25,6 +25,9 @@ group :development do
 end
 
 group :test do
-  gem 'capybara'
+  gem 'guard'
+  gem 'guard-spork'
+  gem 'spork-rails', github: 'sporkrb/spork-rails'
   gem 'shoulda-matchers'
+  gem 'capybara'
 end
