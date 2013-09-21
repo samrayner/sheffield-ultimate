@@ -10,6 +10,6 @@
 
     .collapse.navbar-collapse
       %ul.nav.navbar-nav
-        - @cms_site.pages.published.each do |page|
+        - flattened_pages.each do |page|
           %li{ class: "#{"active" if page == @cms_page}"}
             = link_to page.label, page.full_path
