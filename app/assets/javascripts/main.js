@@ -6,6 +6,7 @@ var Lightbox = {
       if($images.length === 1) {
         $link.attr("title", $images.attr("title"));
         $(this).fancybox({
+          padding: 0,
           helpers: {
             title: {
               type: 'over'

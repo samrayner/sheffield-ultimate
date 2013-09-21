@@ -23,3 +23,14 @@
   .main.container
     = render "shared/flash_messages"
     = yield
+
+  %footer.footer
+    .container
+      .row
+        .col-sm-6
+          %small
+            &copy; Sheffield Steal 2012 &ndash; #{DateTime.now.year}
+        .col-sm-6
+          %p
+            Site by
+            = link_to "Sam Rayner", "http://samrayner.com", class: "samrayner"
