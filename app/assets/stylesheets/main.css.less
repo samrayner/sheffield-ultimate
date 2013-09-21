@@ -71,10 +71,17 @@ a:hover, a:focus, a:active, a:visited {
   color: @darkRed;
 }
 
-img {
+img, iframe {
   max-width: 100%;
   height: auto;
+}
+
+img {
   box-shadow: 0 1px 2px rgba(0,0,0,0.6);
+}
+
+iframe {
+  margin: 0.5em 0;
 }
 
 /* Navbar
@@ -135,7 +142,7 @@ img {
 /* Home
 ================================================== */
 
-#intro {
+#home .row1 .col1 {
   font-size: 1.2em;
 }
 
@@ -143,7 +150,13 @@ img {
 ================================================== */
 
 #results {
+  h1 {
+    font-size: 1.2em;
+  }
+
   table {
+    margin: 1em 0;
+
     caption {
       display: none;
     }
@@ -184,6 +197,7 @@ img {
 .fc-event {
   background-color: @red;
   border-color: @red;
+  font-size: 0.8em;
 }
 
 .fc-text-arrow {
@@ -194,10 +208,11 @@ img {
   margin-right: 0.3em;
 }
 
-a.fc-event:hover {
+a.fc-event {
   color: white;
+  text-decoration: none;
 
-  .fc-event-inner {
+  &:hover .fc-event-inner {
     background-color: rgba(0,0,0,0.2);
   }
 }

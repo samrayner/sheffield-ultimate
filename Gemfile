@@ -13,6 +13,8 @@ gem 'less-rails-bootstrap'
 gem 'less-rails'
 gem 'haml-rails'
 gem 'valid_email'
+gem 'fullcalendar-rails'
+gem 'fancybox2-rails'
 
 group :test, :development do
   gem 'factory_girl_rails', '~> 4.2'

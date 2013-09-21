@@ -13,5 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require twitter/bootstrap
+//= require fullcalendar
+//= require fancybox
 //= require vendor_javascripts
 //= require_tree .
