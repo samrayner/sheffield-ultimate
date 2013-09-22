@@ -1,7 +1,13 @@
 = simple_form_for @email do |f|
-  = f.input :name, input_html: { autofocus: true }
-  = f.input :email
-  = f.input :message, as: :text, input_html: { rows: 10 }
+
+  .row
+    .col-sm-6
+      = f.input :name, input_html: { autofocus: true, maxlength: 80 }
+    .col-sm-6
+      = f.input :email, input_html: { maxlength: 100 }
+  .row
+    .col-sm-12
+      = f.input :message, as: :text, input_html: { rows: 10 }
 
   .hide
     = f.input :first_name, hint: "Leave this blank!"
