@@ -92,6 +92,9 @@ GEM
     fancybox2-rails (0.2.4)
       railties (>= 3.1.0)
     ffi (1.9.0)
+    figaro (0.7.0)
+      bundler (~> 1.0)
+      rails (>= 3, < 5)
     formatador (0.2.4)
     formatted_form (2.1.1)
       rails (>= 3.1.0)
@@ -248,6 +251,7 @@ DEPENDENCIES
   comfortable_mexican_sofa (~> 1.9.0)
   factory_girl_rails (~> 4.2)
   fancybox2-rails
+  figaro
   fullcalendar-rails
   guard
   guard-spork

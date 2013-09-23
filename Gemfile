@@ -15,6 +15,7 @@ gem 'haml-rails'
 gem 'valid_email'
 gem 'fullcalendar-rails'
 gem 'fancybox2-rails'
+gem 'figaro'
 
 group :test, :development do
   gem 'factory_girl_rails', '~> 4.2'
