@@ -19,7 +19,7 @@ module CmsHelper
 
   def linked_image(filename)
     file = uploaded_file(filename)
-    file_url = file.file.url if file else nil
+    file_url = file.file.url rescue nil
     "<a href=\"#{file_url}\">#{image(filename)}</a>".html_safe
   end
 end
