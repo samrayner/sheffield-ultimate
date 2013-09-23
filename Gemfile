@@ -1,4 +1,5 @@
 source 'https://rubygems.org'
+ruby '2.0.0'
 
 gem 'simple_form', github: 'plataformatec/simple_form'
 
@@ -33,4 +34,8 @@ group :test do
   gem 'spork-rails', github: 'sporkrb/spork-rails'
   gem 'shoulda-matchers'
   gem 'capybara'
+end
+
+group :production do
+  gem 'rails_12factor'
 end
