@@ -1,19 +1,29 @@
 require 'spec_helper'
 
 describe EmailsController do
+  before :all do
+    site = FactoryGirl.create(:cms_site, identifier: "sheffield-ultimate")
+    ComfortableMexicanSofa::Fixture::Importer.new(site.identifier, site.identifier, :force).import!
+  end
+
+  after :all do
+    [Cms::Site, Cms::Layout, Cms::Page, Cms::File].each(&:delete_all)
+  end
+
   describe :new do
-    it "returns http success" do
+    before do
       get 'new'
+    end
+
+    it "returns http success" do
       response.should be_success
     end
 
     it "assigns a new email" do
-      get 'new'
       assigns(:email).should be_a_new(Email)
     end
 
     it "renders the email form" do
-      get 'new'
       response.should render_template("emails/_form")
     end
   end
@@ -41,24 +51,32 @@ describe EmailsController do
       post :create, email: @params
     end
 
-    it "sets a success flash message" do
-      post :create, email: @params
-      flash[:success].should match(/thank you/i)
+    context "valid" do
+      before do
+        post :create, email: @params
+      end
+
+      it "sets a success flash message" do
+        flash[:success].should match(/thank you/i)
+      end
+
+      it "renders the email" do
+        response.should render_template("contact_mailer/contact_email")
+      end
+
+      it "redirects to the contact page" do
+        response.should redirect_to new_email_path
+      end
     end
 
-    it "redirects to the contact page" do
-      post :create, email: @params
-      response.should redirect_to new_email_path
-    end
-
-    context "spam" do
+    context "invalid" do
       before do
         spam_params = @params
         spam_params["first_name"] = "Toast"
         post :create, email: spam_params
       end
 
-      it "should set render the form" do
+      it "lrenders the email form" do
         response.should render_template("emails/_form")
       end
     end
@@ -75,7 +93,7 @@ describe EmailsController do
         flash[:error].should match(/could not be delivered/i)
       end
 
-      it "should set render the form" do
+      it "renders the email form" do
         response.should render_template("emails/_form")
       end
     end

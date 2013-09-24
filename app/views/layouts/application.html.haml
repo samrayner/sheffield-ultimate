@@ -13,6 +13,10 @@
   = stylesheet_link_tag "application", media: "all"
   = javascript_include_tag "application"
 
+  /layout-specific css & js from CMS
+  = stylesheet_link_tag cms_content_css_path(@cms_site.id, @cms_layout.identifier)
+  = javascript_include_tag cms_content_js_path(@cms_site.id, @cms_layout.identifier)
+
 %body{ id: @cms_page.slug || "home" }
   = render partial: "shared/navigation"
 

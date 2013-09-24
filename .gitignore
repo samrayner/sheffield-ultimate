@@ -14,7 +14,6 @@ capybara-*.html
 **.orig
 rerun.txt
 pickle-email-*.html
-db/cms_fixtures/
 
 # Ignore application configuration
 /config/application.yml

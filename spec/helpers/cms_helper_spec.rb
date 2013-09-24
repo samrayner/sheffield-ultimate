@@ -5,6 +5,10 @@ describe CmsHelper do
     @cms_site = double(:cms_site)
   end
 
+  after do
+    Cms::File.delete_all
+  end
+
   describe :flattened_pages do
     before do
       @root = double(:root_page)
@@ -39,7 +43,7 @@ describe CmsHelper do
 
   describe :image do
     before do
-      @image = FactoryGirl.create(:cms_file)
+      @image = FactoryGirl.create(:cms_file, file_file_name: "image-1.jpg")
       @url = "/system/cms/files/files/000/000/001/original/image-1.jpg"
       @image.stub_chain(:file, :url).and_return("/system/cms/files/files/000/000/001/original/image-1.jpg")
       @cms_site.stub(files: [@image])
@@ -56,7 +60,7 @@ describe CmsHelper do
 
   describe :linked_image do
     before do
-      @image = FactoryGirl.create(:cms_file)
+      @image = FactoryGirl.create(:cms_file, file_file_name: "image-1.jpg")
       @url = "/system/cms/files/files/000/000/001/original/image-1.jpg"
       @image.stub_chain(:file, :url).and_return(@url)
       @cms_site.stub(files: [@image])
