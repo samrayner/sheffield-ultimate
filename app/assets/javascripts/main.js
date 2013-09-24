@@ -18,6 +18,13 @@ var Lightbox = {
   }
 };
 
+var Viewport = {
+  getWidth: function() {
+    var size = window.getComputedStyle(document.body,':after').getPropertyValue('content');
+    return size.replace(/\"/g, "");
+  }
+};
+
 var Calendar = {
   init: function() {
     $('#fullcalendar').html("").fullCalendar({
@@ -87,5 +94,8 @@ var Results = {
 $(function() {
   Calendar.init();
   Results.init();
-  Lightbox.init();
+
+  if(Viewport.getWidth() === "wide") {
+    Lightbox.init();
+  }
 });
