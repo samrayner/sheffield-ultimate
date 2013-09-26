@@ -7,7 +7,7 @@
   = csrf_meta_tags
 
   %title
-    = "#{@cms_page.label} ~ " if @cms_page.label
+    = "#{@cms_page.label} ~ " if @cms_page.label && @cms_page.slug #not on homepage
     = @cms_site.label
 
   = stylesheet_link_tag "application", media: "all"
