@@ -19,6 +19,7 @@ gem 'fancybox2-rails'
 gem 'figaro'
 gem 'paperclip'
 gem 'aws-sdk'
+gem 'airbrake'
 
 group :test, :development do
   gem 'factory_girl_rails', '~> 4.2'
