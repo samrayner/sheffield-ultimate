@@ -1,8 +1,6 @@
 source 'https://rubygems.org'
 ruby '2.0.0'
 
-gem 'simple_form', github: 'plataformatec/simple_form'
-
 gem 'rails', '4.0.0'
 gem 'pg'
 gem 'thin'
@@ -10,6 +8,7 @@ gem 'therubyracer'
 gem 'uglifier', '>= 1.3.0'
 gem 'jquery-rails'
 gem 'comfortable_mexican_sofa', '~> 1.9.0'
+gem 'simple_form', '~> 3.0.0'
 gem 'less-rails-bootstrap'
 gem 'less-rails'
 gem 'haml-rails'
@@ -34,7 +33,7 @@ end
 group :test do
   gem 'guard'
   gem 'guard-spork'
-  gem 'spork-rails', github: 'sporkrb/spork-rails'
+  gem 'spork-rails'
   gem 'shoulda-matchers'
   gem 'capybara'
 end
