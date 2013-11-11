@@ -3,7 +3,6 @@ SheffieldUltimate::Application.routes.draw do
   get '/contact' => 'emails#new'
   get '/events' => 'events#feed'
 
-  ComfortableMexicanSofa::Routing.admin(:path => '/cms-admin')
-  # Make sure this routeset is defined last
-  ComfortableMexicanSofa::Routing.content(:path => '/', sitemap: false)
+  comfy_route :cms_admin, path: '/admin'
+  comfy_route :cms, path: '/', sitemap: false
 end

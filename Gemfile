@@ -1,13 +1,13 @@
 source 'https://rubygems.org'
 ruby '2.0.0'
 
-gem 'rails', '4.0.0'
+gem 'rails', '4.0.1'
 gem 'pg'
 gem 'thin'
 gem 'therubyracer'
 gem 'uglifier', '>= 1.3.0'
 gem 'jquery-rails'
-gem 'comfortable_mexican_sofa', '~> 1.9.0'
+gem 'comfortable_mexican_sofa', '~> 1.11'
 gem 'simple_form', '~> 3.0.0'
 gem 'less-rails-bootstrap'
 gem 'less-rails'
@@ -21,7 +21,7 @@ gem 'aws-sdk'
 gem 'airbrake'
 
 group :test, :development do
-  gem 'factory_girl_rails', '~> 4.2'
+  gem 'factory_girl_rails', '~> 4.3'
   gem 'simplecov', require: false
   gem 'rspec-rails', '~> 2.14'
 end
