@@ -4,9 +4,11 @@
 @import "twitter/bootstrap/variables.less";
 @import "twitter/bootstrap/mixins.less";
 
+@grey: #fcfcfc;
 @red: #d00;
 @darkRed: darken(@red, 10);
 @lightText: rgba(0,0,0,0.4);
+@borderGrey: #dedede;
 
 .img-replace {
   display: inline-block;
@@ -44,8 +46,14 @@ h3 {
 
 body {
   color: #333;
-  background-color: #fcfcfc;
+  background-color: @grey;
   font-size: 16px;
+}
+
+hr {
+  border-color: @borderGrey;
+  margin-top: 2em;
+  margin-bottom: 2em;
 }
 
 p {
@@ -74,13 +82,18 @@ a:hover, a:focus, a:active, a:visited {
   color: @darkRed;
 }
 
+iframe {
+  max-width: 100%;
+}
+
 .iframe-crop {
   position: relative;
-  height: 400px;
+  height: 300px;
   width: 100%;
   overflow: hidden;
 
   iframe {
+    max-width: none;
     width: 2000px;
     margin-left: -1000px;
     position: absolute;
@@ -108,6 +121,10 @@ img {
     color: #bbb;
   }
 
+  .navbar-collapse {
+    position: relative;
+  }
+
   @media (min-width: @screen-sm) {
     .navbar-brand {
       display: none;
@@ -116,6 +133,12 @@ img {
     .navbar-collapse {
       padding-left: 0;
       margin-left: -15px;
+    }
+
+    //playbook link
+    li:last-of-type {
+      position: absolute;
+      right: -15px;
     }
   }
 }
@@ -168,6 +191,53 @@ img {
   .row1 ul {
     list-style: none;
     padding: 0;
+  }
+
+  .row2 h1 {
+    text-align: center;
+    margin: 2em auto 0.5em;
+    color: rgba(0,0,0,0.3);
+    text-transform: uppercase;
+    font-size: 1.4em;
+    width: 13em;
+    background-color: @grey;
+
+    &::before {
+      content: " ";
+      display: block;
+      position: absolute;
+      z-index: -1;
+      margin-top: 0.5em;
+      left: 15px;
+      right: 15px;
+      height: 1px;
+      background-color: @borderGrey;
+    }
+  }
+}
+
+#map {
+  position: relative;
+  overflow: hidden;
+
+  .map-link {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    display: block;
+    color: white;
+    background-color: rgba(0,0,0,0.7);
+    border-radius: 999px;
+    line-height: 2em;
+    padding: 0 1em;
+    font-weight: bold;
+    text-shadow: 0 1px 0 black;
+    font-size: 0.8em;
+    text-decoration: none;
+
+    &:hover {
+      background-color: black;
+    }
   }
 }
 
@@ -257,7 +327,7 @@ img {
 ================================================== */
 
 .footer {
-  border-top: 1px solid #dedede;
+  border-top: 1px solid @borderGrey;
   box-shadow: inset 0 1px 0 white;
   padding-top: 1em;
   height: 100px;

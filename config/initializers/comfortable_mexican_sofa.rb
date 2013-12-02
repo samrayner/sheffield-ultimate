@@ -3,6 +3,7 @@
 ComfortableMexicanSofa.configure do |config|
   # Title of the admin area
   #   config.cms_title = 'ComfortableMexicanSofa CMS Engine'
+  config.cms_title = "Steal CMS Admin"
 
   # Module responsible for authentication. You can replace it with your own.
   # It simply needs to have #authenticate method. See http_auth.rb for reference.
@@ -12,6 +13,7 @@ ComfortableMexicanSofa.configure do |config|
   # will have access to @cms_site, @cms_layout, @cms_page so you can use them in
   # your logic. Default module doesn't do anything.
   #   config.public_auth = 'ComfortableMexicanSofa::DummyAuth'
+  config.public_auth = "StealAuth"
 
   # When arriving at /cms-admin you may chose to redirect to arbirtary path,
   # for example '/cms-admin/users'
@@ -89,8 +91,18 @@ end
 
 # Default credentials for ComfortableMexicanSofa::HttpAuth
 # YOU REALLY WANT TO CHANGE THIS BEFORE PUTTING YOUR SITE LIVE
-ComfortableMexicanSofa::HttpAuth.username = 'admin'
-ComfortableMexicanSofa::HttpAuth.password = 'endcliffe'
+ComfortableMexicanSofa::HttpAuth.username = ENV["ADMIN_USERNAME"]
+ComfortableMexicanSofa::HttpAuth.password = ENV["ADMIN_PASSWORD"]
+
+module StealAuth
+  def authenticate
+    protected_paths = ['/playbook']
+    return unless protected_paths.member?(@cms_page.full_path)
+    authenticate_or_request_with_http_basic do |username, password|
+      username == ENV["PLAYER_USERNAME"] && password == ENV["PLAYER_PASSWORD"]
+    end
+  end
+end
 
 # If you need to inject some html in cms admin views you can define what partial
 # should be rendered into the following areas:

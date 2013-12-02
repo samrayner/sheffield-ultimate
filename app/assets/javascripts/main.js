@@ -1,3 +1,27 @@
+var FluidVideos = {
+  init: function() {
+    var $allVideos = $("iframe[src*='vimeo.com'], iframe[src*='youtube.com']");
+    var $fluidEl = $(".container");
+
+    $allVideos.each(function() {
+      $(this)
+        .data('aspectRatio', this.height/this.width)
+        .removeAttr('height')
+        .removeAttr('width');
+    });
+
+    $(window).resize(function() {
+      var newWidth = $fluidEl.width();
+      $allVideos.each(function() {
+        var $el = $(this);
+        $el.width(newWidth).height(newWidth * $el.data('aspectRatio'));
+      });
+    });
+
+    $(window).resize();
+  }
+};
+
 var Lightbox = {
   init: function() {
     $("a[href$='.jpg'],a[href$='.png'],a[href$='.jpeg']").each(function() {
@@ -94,6 +118,7 @@ var Results = {
 $(function() {
   Calendar.init();
   Results.init();
+  FluidVideos.init();
 
   if(Viewport.getWidth() === "wide") {
     Lightbox.init();
