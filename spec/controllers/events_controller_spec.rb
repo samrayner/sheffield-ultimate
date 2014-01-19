@@ -3,7 +3,7 @@ require 'spec_helper'
 describe EventsController do
   describe :feed do
     before do
-      get 'feed'
+      get :feed
     end
 
     it "returns http success" do

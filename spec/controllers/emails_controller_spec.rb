@@ -12,7 +12,7 @@ describe EmailsController do
 
   describe :new do
     before do
-      get 'new'
+      get :new
     end
 
     it "returns http success" do
@@ -29,31 +29,29 @@ describe EmailsController do
   end
 
   describe :create do
-    before do
-      @params = { "name" => "Sam Rayner", "email" => "sam@example.com", "message" => "Hello" }
-    end
+    let(:params) { { "name" => "Sam Rayner", "email" => "sam@example.com", "message" => "Hello" } }
 
     it "returns http success" do
-      get 'create'
+      get :create
       response.should be_success
     end
 
     it "assigns a new email from the params" do
-      email = Email.new(@params)
-      Email.should_receive(:new).with(@params).and_return(email)
-      post :create, email: @params
+      email = Email.new(params)
+      Email.should_receive(:new).with(params).and_return(email)
+      post :create, email: params
     end
 
     it "delivers the email" do
-      email = Email.new(@params)
+      email = Email.new(params)
       Email.stub(:new).and_return(email)
       email.should_receive(:submit)
-      post :create, email: @params
+      post :create, email: params
     end
 
     context "valid" do
       before do
-        post :create, email: @params
+        post :create, email: params
       end
 
       it "sets a success flash message" do
@@ -71,7 +69,7 @@ describe EmailsController do
 
     context "invalid" do
       before do
-        spam_params = @params
+        spam_params = params
         spam_params["first_name"] = "Toast"
         post :create, email: spam_params
       end
@@ -83,10 +81,10 @@ describe EmailsController do
 
     context "delivery failure" do
       before do
-        email = Email.new(@params)
+        email = Email.new(params)
         email.stub(:submit).and_return(false)
-        Email.stub(:new).with(@params).and_return(email)
-        post :create, email: @params
+        Email.stub(:new).with(params).and_return(email)
+        post :create, email: params
       end
 
       it "sets an error flash message" do
