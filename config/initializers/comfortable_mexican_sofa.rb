@@ -96,8 +96,8 @@ ComfortableMexicanSofa::HttpAuth.password = ENV["ADMIN_PASSWORD"]
 
 module StealAuth
   def authenticate
-    protected_paths = ['/playbook']
-    return unless protected_paths.member?(@cms_page.full_path)
+    protected_paths = ["playbook"]
+    return unless protected_paths.member?(params["cms_path"])
     authenticate_or_request_with_http_basic do |username, password|
       username == ENV["PLAYER_USERNAME"] && password == ENV["PLAYER_PASSWORD"]
     end
