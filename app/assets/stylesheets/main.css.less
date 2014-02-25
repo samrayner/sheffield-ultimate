@@ -20,7 +20,12 @@
 /* Media queries for Javascript viewport detection
 ================================================== */
 
-body:after { display: none; }
+body:after {
+  display: block;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
 
 @media (max-width: @screen-sm) {
   body:after { content: "thin"; }
