@@ -6,7 +6,7 @@ describe CmsHelper do
   end
 
   after do
-    Cms::File.delete_all
+    Comfy::Cms::File.delete_all
   end
 
   describe :flattened_pages do

@@ -1,5 +1,5 @@
 FactoryGirl.define do
-  factory :cms_file, class: Cms::File do
+  factory :cms_file, class: Comfy::Cms::File do
     site_id 1
     label "Image label"
     description "Image description"

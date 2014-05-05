@@ -58,3 +58,12 @@ Spork.each_run do
   # This code will be run each time you run your specs.
 
 end
+
+def import_fixtures(site_identifier)
+  site = FactoryGirl.create(:cms_site, identifier: site_identifier)
+  ComfortableMexicanSofa::Fixture::Importer.new(site_identifier, site_identifier, :force).import!
+end
+
+def delete_all_cms_data
+  [Comfy::Cms::Site, Comfy::Cms::Layout, Comfy::Cms::Page, Comfy::Cms::File].each(&:delete_all)
+end

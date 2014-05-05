@@ -1,5 +1,5 @@
 FactoryGirl.define do
-  factory :cms_site, class: Cms::Site do
+  factory :cms_site, class: Comfy::Cms::Site do
     label "My Website"
     identifier "my-website"
     hostname "localhost"

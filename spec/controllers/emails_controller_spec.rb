@@ -2,12 +2,11 @@ require 'spec_helper'
 
 describe EmailsController do
   before :all do
-    site = FactoryGirl.create(:cms_site, identifier: "sheffield-ultimate")
-    ComfortableMexicanSofa::Fixture::Importer.new(site.identifier, site.identifier, :force).import!
+    import_fixtures("sheffield-ultimate")
   end
 
   after :all do
-    [Cms::Site, Cms::Layout, Cms::Page, Cms::File].each(&:delete_all)
+    delete_all_cms_data
   end
 
   describe :new do
