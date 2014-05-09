@@ -280,7 +280,7 @@ DEPENDENCIES
   airbrake
   aws-sdk
   capybara
-  comfortable_mexican_sofa (~> 1.11)
+  comfortable_mexican_sofa (~> 1.12)
   factory_girl_rails (~> 4.3)
   fancybox2-rails
   figaro

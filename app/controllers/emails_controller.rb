@@ -1,6 +1,4 @@
 class EmailsController < ApplicationController
-  include ApplicationHelper
-
   def new
     @email = Email.new
     render cms_page: "/contact"

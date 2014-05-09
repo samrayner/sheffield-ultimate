@@ -4,17 +4,18 @@ module CmsHelper
   end
 
   def uploaded_file(filename)
-    return @cms_site.files.detect{|f| f.file_file_name == filename}
+    return @cms_site.files.detect{ |f| f.file_file_name == filename }
   end
 
   def image(filename)
+    tag = '<img src="" alt="Missing image" />'
     file = uploaded_file(filename)
 
-    unless file
-      return '<img src="" alt="Missing image" />'.html_safe
+    if file
+      tag = "<img src=\"#{file.file.url}\" alt=\"#{file.label}\" title=\"#{file.description}\" />"
     end
 
-    "<img src=\"#{file.file.url}\" alt=\"#{file.label}\" title=\"#{file.description}\" />".html_safe
+    tag.html_safe
   end
 
   def linked_image(filename)
