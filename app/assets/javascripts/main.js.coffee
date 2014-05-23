@@ -28,19 +28,21 @@ class Viewport
 
 class Lightbox
   @init: ->
-    $("a[href$='.jpg'],a[href$='.png'],a[href$='.jpeg']").each ->
-      $link = $(this)
-      $images = $link.children('img[src="'+$link.attr("href")+'"]')
-      if $images.length == 1
-        $link.attr("title", $images.attr("title"))
-        $(this).fancybox({
-          padding: 0,
-          helpers: {
-            title: {
-              type: 'over'
-            }
-          }
-        })
+    $imageLinks = $("a[href$='.jpg'],a[href$='.png'],a[href$='.jpeg']")
+      .filter ->
+        $link = $(this)
+        $images = $link.children('img[src="'+$link.attr("href")+'"]')
+        if $images.length == 1
+          $link.attr("title", $images.attr("title"))
+        else
+          false
+
+    $imageLinks.fancybox
+        padding: 0
+        helpers:
+          title:
+            type: 'over'
+          thumbs: $imageLinks.length > 1
 
 class Calendar
   @init: ->

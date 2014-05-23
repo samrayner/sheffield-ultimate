@@ -10,13 +10,6 @@
 @lightText: rgba(0,0,0,0.4);
 @borderGrey: #dedede;
 
-.img-replace {
-  display: inline-block;
-  text-indent: -9999px;
-  overflow: hidden;
-  text-align: left;
-}
-
 /* Media queries for Javascript viewport detection
 ================================================== */
 
@@ -167,7 +160,7 @@ img {
   }
 
   h1 {
-    .img-replace;
+    .text-hide;
     margin: 0;
     position: absolute;
     top: 0;
@@ -323,6 +316,51 @@ img {
   }
 }
 
+/* Galleries
+================================================== */
+
+.gallery {
+  @thumbsAcross: 6;
+  @thumbMargin: 2px;
+  @thumbWidth: 100%/@thumbsAcross;
+
+  .clearfix;
+  margin: -@thumbMargin;
+
+  a {
+    position: relative;
+    display: block;
+    float: left;
+    overflow: hidden;
+    background-color: rgba(0,0,0,0.1);
+    border: @thumbMargin solid white;
+
+    width: @thumbWidth;
+    padding-bottom: @thumbWidth;
+
+    @media (max-width: @screen-sm) {
+      width: @thumbWidth*2;
+      padding-bottom: @thumbWidth*2;
+    }
+
+    &:hover, &:focus {
+      img {
+        opacity: 0.8;
+      }
+    }
+  }
+
+  img {
+    width: 200%;
+    max-width: none;
+    box-shadow: none;
+    position: absolute;
+    left: 50%;
+    margin-left: -100%;
+  }
+}
+
+
 /* Contact
 ================================================== */
 
@@ -358,7 +396,9 @@ img {
   }
 
   .samrayner {
-    .img-replace;
+    .text-hide;
+    display: inline-block;
+    overflow: hidden;
     width: 110px;
     height: 30px;
     margin-left: 2px;

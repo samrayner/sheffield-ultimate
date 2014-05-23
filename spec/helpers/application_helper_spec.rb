@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe ApplicationHelper do
-  describe :alert_class do
+  describe "#alert_class" do
     it "should return the twitterized type for alert" do
       alert_class(:alert).should == "alert alert-warning"
     end

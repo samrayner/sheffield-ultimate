@@ -1,15 +1,19 @@
 module CmsHelper
   def flattened_pages
-    return [@cms_site.pages.root] + @cms_site.pages.root.children.published
+    [@cms_site.pages.root] + @cms_site.pages.root.children.published
   end
 
   def uploaded_file(filename)
-    return @cms_site.files.detect{ |f| f.file_file_name == filename }
+    @cms_site.files.find_by_file_file_name(filename)
   end
 
-  def image(filename)
+  def uploaded_images
+    @cms_site.files.where("file_content_type LIKE 'image/%'").order(:position)
+  end
+
+  def image(file)
+    file = uploaded_file(file) if file.kind_of?(String)
     tag = '<img src="" alt="Missing image" />'
-    file = uploaded_file(filename)
 
     if file
       tag = "<img src=\"#{file.file.url}\" alt=\"#{file.label}\" title=\"#{file.description}\" />"
@@ -18,9 +22,20 @@ module CmsHelper
     tag.html_safe
   end
 
-  def linked_image(filename)
-    file = uploaded_file(filename)
+  def linked_image(file, group=nil)
+    file = uploaded_file(file) if file.kind_of?(String)
     file_url = file.file.url rescue nil
-    "<a href=\"#{file_url}\">#{image(filename)}</a>".html_safe
+
+    "<a href=\"#{file_url}\" rel=\"#{group}\">#{image(file)}</a>".html_safe
+  end
+
+  def gallery(category=nil)
+    html = '<div class="gallery gallery-'+(category || "all")+'">'
+
+    uploaded_images.for_category(category).each do |file|
+      html += linked_image(file, category)
+    end
+
+    (html + '</div>').html_safe
   end
 end
