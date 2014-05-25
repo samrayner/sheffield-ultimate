@@ -365,7 +365,33 @@ img {
 ================================================== */
 
 #contact {
-  .btn {
+  #new_subscription_email {
+    @media (min-width: @screen-sm) {
+      .form-group {
+        width: 35%;
+
+        input {
+          width: 100%;
+        }
+      }
+
+      .btn {
+        float: right;
+        width: 27%;
+      }
+    }
+
+    @media (min-width: @screen-md) {
+      .form-group { width: 39%; }
+      .btn { width: 20%; }
+    }
+  }
+
+  hr {
+    margin-top: 1em;
+  }
+
+  #new_email .btn {
     width: 8em;
   }
 }
