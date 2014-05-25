@@ -1,5 +1,10 @@
 SheffieldUltimate::Application.routes.draw do
-  resources :emails, only: [:new, :create]
+  resources :emails, only: [:new, :create] do
+    collection do
+      post :subscribe
+    end
+  end
+
   get '/contact' => 'emails#new'
   get '/events' => 'events#feed'
 

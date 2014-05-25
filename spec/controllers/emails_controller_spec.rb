@@ -18,40 +18,34 @@ describe EmailsController do
       response.should be_success
     end
 
-    it "assigns a new email" do
-      assigns(:email).should be_a_new(Email)
+    it "assigns a new subscription email" do
+      assigns(:contact_email).should be_a_new(Email)
     end
 
-    it "renders the email form" do
-      response.should render_template("emails/_form")
+    it "assigns a new contact email" do
+      assigns(:subscription_email).should be_a_new(Email)
+    end
+
+    it "renders the contact page" do
+      response.should render_template("emails/_contact_form")
     end
   end
 
-  describe :create do
-    let(:params) { { "name" => "Sam Rayner", "email" => "sam@example.com", "message" => "Hello" } }
-
-    it "returns http success" do
-      get :create
-      response.should be_success
+  shared_examples "an email form" do |action_key, params_key|
+    let(:params) do
+      { "name" => "Sam Rayner", "email" => "sam@example.com", "message" => "Hello" }
     end
-
-    it "assigns a new email from the params" do
-      email = Email.new(params)
-      Email.should_receive(:new).with(params).and_return(email)
-      post :create, email: params
-    end
+    let(:action) { post action_key, "#{params_key}" => params }
+    let!(:email) { Email.new(params) }
 
     it "delivers the email" do
-      email = Email.new(params)
       Email.stub(:new).and_return(email)
       email.should_receive(:submit)
-      post :create, email: params
+      action
     end
 
     context "valid" do
-      before do
-        post :create, email: params
-      end
+      before { action }
 
       it "sets a success flash message" do
         flash[:success].should match(/thank you/i)
@@ -62,7 +56,7 @@ describe EmailsController do
       end
 
       it "redirects to the contact page" do
-        response.should redirect_to new_email_path
+        response.should redirect_to contact_path
       end
     end
 
@@ -73,26 +67,59 @@ describe EmailsController do
         post :create, email: spam_params
       end
 
-      it "lrenders the email form" do
-        response.should render_template("emails/_form")
+      it "renders the contact page" do
+        response.should render_template("emails/_contact_form")
       end
     end
 
     context "delivery failure" do
       before do
-        email = Email.new(params)
         email.stub(:submit).and_return(false)
-        Email.stub(:new).with(params).and_return(email)
-        post :create, email: params
+        Email.stub(:new).and_return(email)
+        action
       end
 
       it "sets an error flash message" do
-        flash[:error].should match(/could not be delivered/i)
+        flash[:error].should match(/sorry/i)
       end
 
-      it "renders the email form" do
-        response.should render_template("emails/_form")
+      it "renders the contact page" do
+        response.should render_template("emails/_contact_form")
       end
+    end
+  end
+
+  describe :create do
+    let(:action) do
+      post :create, email: { name: "Sam", email: "a@b.com", message: "Hello"}
+    end
+
+    it_behaves_like "an email form", :create, :email
+
+    it "assigns a new contact email" do
+      action
+      assigns(:contact_email).message.should == "Hello"
+    end
+
+    it "assigns a new subscription email" do
+      action
+      assigns(:subscription_email).should be_a_new(Email)
+    end
+  end
+
+  describe :subscribe do
+    let(:action) { post :subscribe, subscription_email: { name: "Sam", email: "a@b.com", message: "Subscribe"} }
+
+    it_behaves_like "an email form", :subscribe, :subscription_email
+
+    it "assigns a new subscription email" do
+      action
+      assigns(:subscription_email).message.should == "Subscribe"
+    end
+
+    it "assigns a new contact email" do
+      action
+      assigns(:contact_email).should be_a_new(Email)
     end
   end
 end

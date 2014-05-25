@@ -8,7 +8,7 @@ class Tableless
   def initialize(attributes={})
    self.new_record = attributes.blank?
    attributes && attributes.each do |name, value|
-     send("#{name}=", value) if respond_to? name.to_sym 
+     send("#{name}=", value) if respond_to? name.to_sym
    end
   end
 
@@ -21,6 +21,10 @@ class Tableless
   end
 
   def self.inspect
-    "#<#{ self.to_s} #{ self.attributes.collect{ |e| ":#{ e }" }.join(', ') }>"
+    if self.respond_to?(:attributes)
+      "#<#{self.to_s} #{self.attributes.collect{ |e| ":#{ e }" }.join(', ')}>"
+    else
+      "#<#{self.to_s}>"
+    end
   end
 end
