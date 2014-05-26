@@ -29,8 +29,8 @@ describe "Emails" do
         fill_in "Email", with: "sam@example.com"
         fill_in "Message", with: "What a great website."
         click_button "Send"
+        page.body.should have_content("can't be blank")
       end
-      page.body.should have_content("can't be blank")
     end
 
     it "does not deliver a message with an invalid email" do
@@ -39,8 +39,8 @@ describe "Emails" do
         fill_in "Email", with: "not_an_email"
         fill_in "Message", with: "What a great website."
         click_button "Send"
+        page.body.should have_content("is invalid")
       end
-      page.body.should have_content("is invalid")
     end
 
     it "does not deliver a message with a blank email" do
@@ -48,8 +48,8 @@ describe "Emails" do
         fill_in "Name", with: "Sam Rayner"
         fill_in "Message", with: "What a great website."
         click_button "Send"
+        page.body.should have_content("can't be blank")
       end
-      page.body.should have_content("can't be blank")
     end
 
     it "does not deliver a message with a blank message" do
@@ -57,8 +57,8 @@ describe "Emails" do
         fill_in "Name", with: "Sam Rayner"
         fill_in "Email", with: "sam@example.com"
         click_button "Send"
+        page.body.should have_content("can't be blank")
       end
-      page.body.should have_content("can't be blank")
     end
 
     it "does not deliver spam" do
@@ -68,8 +68,8 @@ describe "Emails" do
         fill_in "Message", with: "All the junk you'll never need."
         fill_in "First name", with: "Want to buy some gold?"
         click_button "Send"
+        page.body.should have_content("must be blank")
       end
-      page.body.should have_content("must be blank")
     end
   end
 
@@ -87,8 +87,8 @@ describe "Emails" do
       within "#new_subscription_email" do
         fill_in "Email", with: "sam@example.com"
         click_button "Subscribe"
+        page.body.should have_content("can't be blank")
       end
-      page.body.should have_content("can't be blank")
     end
 
     it "does not deliver a message with an invalid email" do
@@ -96,16 +96,16 @@ describe "Emails" do
         fill_in "Name", with: "Sam Rayner"
         fill_in "Email", with: "not_an_email"
         click_button "Subscribe"
+        page.body.should have_content("is invalid")
       end
-      page.body.should have_content("is invalid")
     end
 
     it "does not deliver a message with a blank email" do
       within "#new_subscription_email" do
         fill_in "Name", with: "Sam Rayner"
         click_button "Subscribe"
+        page.body.should have_content("can't be blank")
       end
-      page.body.should have_content("can't be blank")
     end
 
     it "does not deliver spam" do
@@ -114,8 +114,8 @@ describe "Emails" do
         fill_in "Email", with: "spammer@spammyjunk.com"
         fill_in "First name", with: "Want to buy some gold?"
         click_button "Subscribe"
+        page.body.should have_content("must be blank")
       end
-      page.body.should have_content("must be blank")
     end
   end
 end
