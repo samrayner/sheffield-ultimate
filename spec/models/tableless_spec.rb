@@ -34,7 +34,7 @@ describe Tableless do
   describe :persisted? do
     it "should not be persisted" do
       tableless = Tableless.new
-      tableless.persisted?.should be_false
+      tableless.persisted?.should be false
     end
   end
 end
