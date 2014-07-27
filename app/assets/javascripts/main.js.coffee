@@ -1,24 +1,3 @@
-class FluidVideos
-  @init: (container=null, $videos=null) ->
-    $videos ||= $("iframe[src*='vimeo.com'], iframe[src*='youtube.com']")
-
-    $videos.each ->
-      $(this)
-        .data('aspectRatio', this.height/this.width)
-        .removeAttr('height')
-        .removeAttr('width')
-
-    $(window).resize ->
-      $videos.each ->
-        $elm = $(this)
-        $parent = if container then $(container) else $elm.parent()
-        newWidth = $parent.width()
-        $elm
-          .width(newWidth)
-          .height(newWidth * $elm.data('aspectRatio'))
-
-    $(window).resize()
-
 class Viewport
   @getWidth: ->
     size = window
@@ -46,18 +25,22 @@ class Lightbox
 
 class Calendar
   @init: ->
-    $('#fullcalendar').html("").fullCalendar({
-      events: {
-        url: '/events.json',
-        allDayDefault: false
-      },
-      firstDay: 1,
-      timeFormat: 'h(:mm)tt',
+    $('#fullcalendar').html("").fullCalendar
+      events: 'https://www.google.com/calendar/feeds/shefultimate%40gmail.com/public/basic'
+      firstDay: 1
+      timeFormat: 'h(:mm)tt'
       eventRender: (event, element) ->
         if event.location.length
           element.tooltip(title: event.location, container: "body")
         return
-    })
+      eventClick: (event) ->
+        if event.description.indexOf("http") == 0
+          window.open(event.description)
+          return false
+
+        if event.location.length
+          window.open("https://www.google.co.uk/maps/preview?q="+encodeURIComponent(event.location))
+          return false
 
 class Results
   constructor: (@traceClass="trace", @collapsedClass="collapsed") ->
@@ -96,7 +79,6 @@ class Results
 
 $ ->
   Calendar.init()
-  FluidVideos.init()
 
   results = new Results()
   results.init()
