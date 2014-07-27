@@ -23,7 +23,7 @@ gem 'airbrake'
 group :test, :development do
   gem 'factory_girl_rails', '~> 4.4'
   gem 'simplecov', require: false
-  gem 'rspec-rails', '~> 2.99'
+  gem 'rspec-rails', '~> 3.0'
 end
 
 group :development do

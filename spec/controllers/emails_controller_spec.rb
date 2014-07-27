@@ -9,7 +9,7 @@ describe EmailsController do
     delete_all_cms_data
   end
 
-  describe :new do
+  describe "#new" do
     before do
       get :new
     end
@@ -89,7 +89,7 @@ describe EmailsController do
     end
   end
 
-  describe :create do
+  describe "#create" do
     let(:action) do
       post :create, email: { name: "Sam", email: "a@b.com", message: "Hello"}
     end
@@ -107,7 +107,7 @@ describe EmailsController do
     end
   end
 
-  describe :subscribe do
+  describe "#subscribe" do
     let(:action) { post :subscribe, subscription_email: { name: "Sam", email: "a@b.com", message: "Subscribe"} }
 
     it_behaves_like "an email form", :subscribe, :subscription_email

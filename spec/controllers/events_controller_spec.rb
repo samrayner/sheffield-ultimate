@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe EventsController do
-  describe :feed do
+  describe "#feed" do
     before do
       get :feed
     end

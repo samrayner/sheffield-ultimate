@@ -1,7 +1,7 @@
 include ActiveModel::Lint::Tests
 
 describe Tableless do
-  describe :initialize do
+  describe "#initialize" do
     before do
       class Person < Tableless
         attr_accessor :name
@@ -19,7 +19,7 @@ describe Tableless do
     end
   end
 
-  describe :new_record? do
+  describe "#new_record?" do
     it "should return true for a new object" do
       tableless = Tableless.new
       expect(tableless.new_record?).to eq(true)
@@ -31,7 +31,7 @@ describe Tableless do
     end
   end
 
-  describe :persisted? do
+  describe "#persisted?" do
     it "should not be persisted" do
       tableless = Tableless.new
       expect(tableless.persisted?).to be false

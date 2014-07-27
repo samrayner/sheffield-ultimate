@@ -4,7 +4,7 @@ describe ContactMailer do
   let(:email)  { FactoryGirl.build(:email) }
   let(:mailer) { ContactMailer.contact_email(email) }
 
-  describe :contact_email do
+  describe "#contact_email" do
     it "sends to the correct address" do
       expect(mailer.to).to eq(["info@sheffieldultimate.co.uk"])
     end
@@ -22,7 +22,7 @@ describe ContactMailer do
     end
   end
 
-  describe :deliver do
+  describe "#deliver" do
     before do
       mailer.deliver
     end
