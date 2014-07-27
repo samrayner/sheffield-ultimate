@@ -1,11 +1,11 @@
-= simple_form_for @subscription_email, as: "subscription_email", url: subscribe_emails_path, html: { class: "form-inline" }, defaults: { label_html: { class: "sr-only" } } do |f|
+= bootstrap_form_for @subscription_email, as: :subscription_email, url: subscribe_emails_path, layout: :inline do |f|
 
-  = f.input :name, placeholder: "Name"
-  = f.input :email, placeholder: "Email"
+  = f.text_field :name, placeholder: "Name", hide_label: true
+  = f.email_field :email, placeholder: "Email", hide_label: true
 
   = f.hidden_field :message, value: "Please add me to the mailing list."
 
   .hide
-    = f.input :first_name, hint: "Leave this blank!"
+    = f.text_field :first_name, hint: "Leave this blank!"
 
-  = f.button :submit, "Subscribe"
+  = f.submit "Subscribe"
