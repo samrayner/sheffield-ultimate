@@ -14,9 +14,9 @@ describe CmsHelper do
     let(:child) { double(:child_page) }
 
     before do
-      root.stub_chain(:children, :published).and_return([child, child])
-      @cms_site.stub_chain(:pages, :root).and_return(root)
-      controller.stub(load_cms_site: @cms_site)
+      allow(root).to receive_message_chain(:children, :published).and_return([child, child])
+      allow(@cms_site).to receive_message_chain(:pages, :root).and_return(root)
+      allow(controller).to receive_messages(load_cms_site: @cms_site)
     end
 
     it "returns an flattened array of root page + children" do
@@ -56,7 +56,7 @@ describe CmsHelper do
     let!(:file) { FactoryGirl.create(:cms_file, file_file_name: "image-1.jpg") }
 
     before do
-      helper.stub(uploaded_file: nil)
+      allow(helper).to receive_messages(uploaded_file: nil)
       allow(helper).to receive(:uploaded_file).with("image-1.jpg").and_return(file)
     end
 
@@ -77,7 +77,7 @@ describe CmsHelper do
     let!(:file) { FactoryGirl.create(:cms_file, file_file_name: "image-1.jpg") }
 
     before do
-      helper.stub(uploaded_file: nil)
+      allow(helper).to receive_messages(uploaded_file: nil)
       allow(helper).to receive(:uploaded_file).with("image-1.jpg").and_return(file)
     end
 
@@ -94,7 +94,7 @@ describe CmsHelper do
     let(:images) { double(:images) }
 
     before do
-      helper.stub(uploaded_images: images)
+      allow(helper).to receive_messages(uploaded_images: images)
     end
 
     it "filters images by category" do
@@ -103,7 +103,7 @@ describe CmsHelper do
     end
 
     it "wraps multiple linked images" do
-      images.stub(for_category: [:image, :image])
+      allow(images).to receive_messages(for_category: [:image, :image])
       expect(helper).to receive(:linked_image).twice.with(:image, "foo").and_return("X")
       expect(helper.gallery("foo")).to eq('<div class="gallery gallery-foo">XX</div>')
     end
