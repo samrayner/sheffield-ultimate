@@ -7,6 +7,7 @@ gem 'thin'
 gem 'therubyracer'
 gem 'uglifier', '>= 1.3.0'
 gem 'jquery-rails'
+gem 'jquery-ui-rails', '~> 4.2'
 gem 'comfortable_mexican_sofa', '~> 1.12'
 gem 'simple_form', '3.1.0.rc2'
 gem 'less-rails-bootstrap'
@@ -31,9 +32,6 @@ group :development do
 end
 
 group :test do
-  gem 'guard'
-  gem 'guard-spork'
-  gem 'spork-rails'
   gem 'shoulda-matchers'
   gem 'capybara'
 end

@@ -1,7 +1,8 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe CmsHelper do
-  before do
+  before :all do
+    Comfy::Cms::Site.delete_all
     @cms_site = FactoryGirl.create(:cms_site)
   end
 

@@ -1,4 +1,4 @@
-require "spec_helper"
+require 'rails_helper'
 
 describe ContactMailer do
   let(:email)  { FactoryGirl.build(:email) }

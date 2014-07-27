@@ -1,12 +1,9 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe EmailsController do
   before :all do
-    import_fixtures("sheffield-ultimate")
-  end
-
-  after :all do
     delete_all_cms_data
+    import_fixtures("sheffield-ultimate")
   end
 
   describe "#new" do
