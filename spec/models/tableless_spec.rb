@@ -10,7 +10,7 @@ describe Tableless do
 
     it "takes an array of attributes and sets them" do
       person = Person.new(name: "Sam")
-      person.name.should == "Sam"
+      expect(person.name).to eq("Sam")
     end
 
     it "does not set undefined attributes" do
@@ -22,19 +22,19 @@ describe Tableless do
   describe :new_record? do
     it "should return true for a new object" do
       tableless = Tableless.new
-      tableless.new_record?.should == true
+      expect(tableless.new_record?).to eq(true)
     end
 
     it "should return false for an object with attributes set" do
       tableless = Tableless.new(name: "Sam")
-      tableless.new_record?.should == false
+      expect(tableless.new_record?).to eq(false)
     end
   end
 
   describe :persisted? do
     it "should not be persisted" do
       tableless = Tableless.new
-      tableless.persisted?.should be false
+      expect(tableless.persisted?).to be false
     end
   end
 end

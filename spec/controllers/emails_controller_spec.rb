@@ -15,19 +15,19 @@ describe EmailsController do
     end
 
     it "returns http success" do
-      response.should be_success
+      expect(response).to be_success
     end
 
     it "assigns a new subscription email" do
-      assigns(:contact_email).should be_a_new(Email)
+      expect(assigns(:contact_email)).to be_a_new(Email)
     end
 
     it "assigns a new contact email" do
-      assigns(:subscription_email).should be_a_new(Email)
+      expect(assigns(:subscription_email)).to be_a_new(Email)
     end
 
     it "renders the contact page" do
-      response.should render_template("emails/_contact_form")
+      expect(response).to render_template("emails/_contact_form")
     end
   end
 
@@ -39,8 +39,8 @@ describe EmailsController do
     let!(:email) { Email.new(params) }
 
     it "delivers the email" do
-      Email.stub(:new).and_return(email)
-      email.should_receive(:submit)
+      allow(Email).to receive(:new).and_return(email)
+      expect(email).to receive(:submit)
       action
     end
 
@@ -48,15 +48,15 @@ describe EmailsController do
       before { action }
 
       it "sets a success flash message" do
-        flash[:success].should match(/thank you/i)
+        expect(flash[:success]).to match(/thank you/i)
       end
 
       it "renders the email" do
-        response.should render_template("contact_mailer/contact_email")
+        expect(response).to render_template("contact_mailer/contact_email")
       end
 
       it "redirects to the contact page" do
-        response.should redirect_to contact_path
+        expect(response).to redirect_to contact_path
       end
     end
 
@@ -68,23 +68,23 @@ describe EmailsController do
       end
 
       it "renders the contact page" do
-        response.should render_template("emails/_contact_form")
+        expect(response).to render_template("emails/_contact_form")
       end
     end
 
     context "delivery failure" do
       before do
-        email.stub(:submit).and_return(false)
-        Email.stub(:new).and_return(email)
+        allow(email).to receive(:submit).and_return(false)
+        allow(Email).to receive(:new).and_return(email)
         action
       end
 
       it "sets an error flash message" do
-        flash[:error].should match(/sorry/i)
+        expect(flash[:error]).to match(/sorry/i)
       end
 
       it "renders the contact page" do
-        response.should render_template("emails/_contact_form")
+        expect(response).to render_template("emails/_contact_form")
       end
     end
   end
@@ -98,12 +98,12 @@ describe EmailsController do
 
     it "assigns a new contact email" do
       action
-      assigns(:contact_email).message.should == "Hello"
+      expect(assigns(:contact_email).message).to eq("Hello")
     end
 
     it "assigns a new subscription email" do
       action
-      assigns(:subscription_email).should be_a_new(Email)
+      expect(assigns(:subscription_email)).to be_a_new(Email)
     end
   end
 
@@ -114,12 +114,12 @@ describe EmailsController do
 
     it "assigns a new subscription email" do
       action
-      assigns(:subscription_email).message.should == "Subscribe"
+      expect(assigns(:subscription_email).message).to eq("Subscribe")
     end
 
     it "assigns a new contact email" do
       action
-      assigns(:contact_email).should be_a_new(Email)
+      expect(assigns(:contact_email)).to be_a_new(Email)
     end
   end
 end

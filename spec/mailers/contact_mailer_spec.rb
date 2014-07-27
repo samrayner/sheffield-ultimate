@@ -6,19 +6,19 @@ describe ContactMailer do
 
   describe :contact_email do
     it "sends to the correct address" do
-      mailer.to.should == ["info@sheffieldultimate.co.uk"]
+      expect(mailer.to).to eq(["info@sheffieldultimate.co.uk"])
     end
 
     it "sends to the correct address" do
-      mailer.subject.should == "Message From Website Contact Form"
+      expect(mailer.subject).to eq("Message From Website Contact Form")
     end
 
     it "has the correct from" do
-      mailer.from.should == [email.email]
+      expect(mailer.from).to eq([email.email])
     end
 
     it "has the correct reply_to" do
-      mailer.reply_to.should == [email.email]
+      expect(mailer.reply_to).to eq([email.email])
     end
   end
 
@@ -28,7 +28,7 @@ describe ContactMailer do
     end
 
     it "delivers the email" do
-      ActionMailer::Base.deliveries.last.from.should include(email.email)
+      expect(ActionMailer::Base.deliveries.last.from).to include(email.email)
     end
   end
 end

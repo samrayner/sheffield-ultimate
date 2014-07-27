@@ -20,7 +20,7 @@ describe CmsHelper do
     end
 
     it "returns an flattened array of root page + children" do
-      helper.flattened_pages.should == [root, child, child]
+      expect(helper.flattened_pages).to eq([root, child, child])
     end
   end
 
@@ -28,11 +28,11 @@ describe CmsHelper do
     let!(:image) { FactoryGirl.create(:cms_file, file_file_name: "image-2.png", site_id: @cms_site.id) }
 
     it "returns the correct file by filename" do
-      helper.uploaded_file("image-2.png").should == image
+      expect(helper.uploaded_file("image-2.png")).to eq(image)
     end
 
     it "returns nil for file not found" do
-      helper.uploaded_file("nope").should be_nil
+      expect(helper.uploaded_file("nope")).to be_nil
     end
   end
 
@@ -48,7 +48,7 @@ describe CmsHelper do
     end
 
     it "returns only image files ordered by position" do
-      helper.uploaded_images.should == [image2, image1]
+      expect(helper.uploaded_images).to eq([image2, image1])
     end
   end
 
@@ -57,19 +57,19 @@ describe CmsHelper do
 
     before do
       helper.stub(uploaded_file: nil)
-      helper.stub(:uploaded_file).with("image-1.jpg").and_return(file)
+      allow(helper).to receive(:uploaded_file).with("image-1.jpg").and_return(file)
     end
 
     it "returns an image tag for the file" do
-      helper.image(file).should == '<img src="'+file.file.url+'" alt="Image label" title="Image description" />'
+      expect(helper.image(file)).to eq('<img src="'+file.file.url+'" alt="Image label" title="Image description" />')
     end
 
     it "returns an image tag for the filename" do
-      helper.image("image-1.jpg").should == '<img src="'+file.file.url+'" alt="Image label" title="Image description" />'
+      expect(helper.image("image-1.jpg")).to eq('<img src="'+file.file.url+'" alt="Image label" title="Image description" />')
     end
 
     it "returns a broken image tag for a missing file" do
-      helper.image("nope").should == '<img src="" alt="Missing image" />'
+      expect(helper.image("nope")).to eq('<img src="" alt="Missing image" />')
     end
   end
 
@@ -78,15 +78,15 @@ describe CmsHelper do
 
     before do
       helper.stub(uploaded_file: nil)
-      helper.stub(:uploaded_file).with("image-1.jpg").and_return(file)
+      allow(helper).to receive(:uploaded_file).with("image-1.jpg").and_return(file)
     end
 
     it "returns a linked image tag for the file" do
-      helper.linked_image("image-1.jpg", "foo").should == '<a href="'+file.file.url+'" rel="foo"><img src="'+file.file.url+'" alt="Image label" title="Image description" /></a>'
+      expect(helper.linked_image("image-1.jpg", "foo")).to eq('<a href="'+file.file.url+'" rel="foo"><img src="'+file.file.url+'" alt="Image label" title="Image description" /></a>')
     end
 
     it "returns a broken linked image tag for a missing file" do
-      helper.linked_image("nope", "bar").should == '<a href="" rel="bar"><img src="" alt="Missing image" /></a>'
+      expect(helper.linked_image("nope", "bar")).to eq('<a href="" rel="bar"><img src="" alt="Missing image" /></a>')
     end
   end
 
@@ -98,19 +98,19 @@ describe CmsHelper do
     end
 
     it "filters images by category" do
-      images.should_receive(:for_category).with("foo").and_return([])
+      expect(images).to receive(:for_category).with("foo").and_return([])
       helper.gallery("foo")
     end
 
     it "wraps multiple linked images" do
       images.stub(for_category: [:image, :image])
-      helper.should_receive(:linked_image).twice.with(:image, "foo").and_return("X")
-      helper.gallery("foo").should == '<div class="gallery gallery-foo">XX</div>'
+      expect(helper).to receive(:linked_image).twice.with(:image, "foo").and_return("X")
+      expect(helper.gallery("foo")).to eq('<div class="gallery gallery-foo">XX</div>')
     end
 
     it "defaults category class to all" do
-      images.should_receive(:for_category).with(nil).and_return([])
-      helper.gallery.should == '<div class="gallery gallery-all"></div>'
+      expect(images).to receive(:for_category).with(nil).and_return([])
+      expect(helper.gallery).to eq('<div class="gallery gallery-all"></div>')
     end
   end
 end

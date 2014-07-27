@@ -21,7 +21,7 @@ describe "Emails" do
         fill_in "Message", with: "What a great website."
         click_button "Send"
       end
-      page.body.should have_content("Thank you")
+      expect(page.body).to have_content("Thank you")
     end
 
     it "does not deliver a message with a missing name" do
@@ -29,7 +29,7 @@ describe "Emails" do
         fill_in "Email", with: "sam@example.com"
         fill_in "Message", with: "What a great website."
         click_button "Send"
-        page.body.should have_content("can't be blank")
+        expect(page.body).to have_content("can't be blank")
       end
     end
 
@@ -39,7 +39,7 @@ describe "Emails" do
         fill_in "Email", with: "not_an_email"
         fill_in "Message", with: "What a great website."
         click_button "Send"
-        page.body.should have_content("is invalid")
+        expect(page.body).to have_content("is invalid")
       end
     end
 
@@ -48,7 +48,7 @@ describe "Emails" do
         fill_in "Name", with: "Sam Rayner"
         fill_in "Message", with: "What a great website."
         click_button "Send"
-        page.body.should have_content("can't be blank")
+        expect(page.body).to have_content("can't be blank")
       end
     end
 
@@ -57,7 +57,7 @@ describe "Emails" do
         fill_in "Name", with: "Sam Rayner"
         fill_in "Email", with: "sam@example.com"
         click_button "Send"
-        page.body.should have_content("can't be blank")
+        expect(page.body).to have_content("can't be blank")
       end
     end
 
@@ -68,7 +68,7 @@ describe "Emails" do
         fill_in "Message", with: "All the junk you'll never need."
         fill_in "First name", with: "Want to buy some gold?"
         click_button "Send"
-        page.body.should have_content("must be blank")
+        expect(page.body).to have_content("must be blank")
       end
     end
   end
@@ -80,14 +80,14 @@ describe "Emails" do
         fill_in "Email", with: "sam@samrayner.com"
         click_button "Subscribe"
       end
-      page.body.should have_content("Thank you")
+      expect(page.body).to have_content("Thank you")
     end
 
     it "does not deliver a message with a missing name" do
       within "#new_subscription_email" do
         fill_in "Email", with: "sam@example.com"
         click_button "Subscribe"
-        page.body.should have_content("can't be blank")
+        expect(page.body).to have_content("can't be blank")
       end
     end
 
@@ -96,7 +96,7 @@ describe "Emails" do
         fill_in "Name", with: "Sam Rayner"
         fill_in "Email", with: "not_an_email"
         click_button "Subscribe"
-        page.body.should have_content("is invalid")
+        expect(page.body).to have_content("is invalid")
       end
     end
 
@@ -104,7 +104,7 @@ describe "Emails" do
       within "#new_subscription_email" do
         fill_in "Name", with: "Sam Rayner"
         click_button "Subscribe"
-        page.body.should have_content("can't be blank")
+        expect(page.body).to have_content("can't be blank")
       end
     end
 
@@ -114,7 +114,7 @@ describe "Emails" do
         fill_in "Email", with: "spammer@spammyjunk.com"
         fill_in "First name", with: "Want to buy some gold?"
         click_button "Subscribe"
-        page.body.should have_content("must be blank")
+        expect(page.body).to have_content("must be blank")
       end
     end
   end

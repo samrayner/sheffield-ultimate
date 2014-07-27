@@ -7,15 +7,15 @@ describe EventsController do
     end
 
     it "returns http success" do
-      response.should be_success
+      expect(response).to be_success
     end
 
     it "renders with JSON header" do
-      response.header['Content-Type'].should include 'application/json'
+      expect(response.header['Content-Type']).to include 'application/json'
     end
 
     it "returns valid json" do
-      ActiveSupport::JSON.decode(response.body).should_not be_nil
+      expect(ActiveSupport::JSON.decode(response.body)).not_to be_nil
     end
   end
 end
