@@ -30,10 +30,12 @@
   %footer.footer
     .container
       .row
-        .col-sm-6
+        .col-sm-4
           %small
             &copy; Sheffield Steal 2012 &ndash; #{Date.today.year}
-        .col-sm-6
+        .col-sm-4.text-center
+          %p Page updated #{@cms_page.updated_at.try(:strftime, "%b %d, %Y") }
+        .col-sm-4.text-right
           %p
             Site by
             = link_to "Sam Rayner", "http://samrayner.com", { class: "samrayner", target: "_blank" }
