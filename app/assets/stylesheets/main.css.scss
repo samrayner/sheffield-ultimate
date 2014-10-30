@@ -1,14 +1,13 @@
 /* Vars/Mixins
 ================================================== */
 
-@import "twitter/bootstrap/variables.less";
-@import "twitter/bootstrap/mixins.less";
+@import "bootstrap";
 
-@grey: #fcfcfc;
-@red: #d00;
-@darkRed: darken(@red, 10);
-@lightText: rgba(0,0,0,0.4);
-@borderGrey: #dedede;
+$grey: #fcfcfc;
+$red: #d00;
+$dark-red: darken($red, 10);
+$light-text: rgba(0,0,0,0.4);
+$border-grey: #dedede;
 
 /* Media queries for Javascript viewport detection
 ================================================== */
@@ -20,11 +19,11 @@ body:after {
   overflow: hidden;
 }
 
-@media (max-width: @screen-sm) {
+@media (max-width: $screen-sm) {
   body:after { content: "thin"; }
 }
 
-@media (min-width: @screen-sm) {
+@media (min-width: $screen-sm) {
   body:after { content: "wide"; }
 }
 
@@ -44,12 +43,12 @@ h3 {
 
 body {
   color: #333;
-  background-color: @grey;
+  background-color: $grey;
   font-size: 16px;
 }
 
 hr {
-  border-color: @borderGrey;
+  border-color: $border-grey;
   margin-top: 2em;
   margin-bottom: 2em;
 }
@@ -72,12 +71,12 @@ a {
 }
 
 a:link {
-  color: @red;
+  color: $red;
   text-decoration: underline;
 }
 
 a:hover, a:focus, a:active, a:visited {
-  color: @darkRed;
+  color: $dark-red;
 }
 
 .alert .close {
@@ -104,12 +103,12 @@ iframe {
 }
 
 img {
-  .img-responsive;
+  @include img-responsive;
   box-shadow: 0 1px 2px rgba(0,0,0,0.6);
 }
 
 .btn-default {
-  .button-variant(@btn-danger-color; @btn-danger-bg; @btn-danger-border);
+  @include button-variant($btn-danger-color, $btn-danger-bg, $btn-danger-border);
 }
 
 /* Navbar
@@ -131,7 +130,7 @@ img {
     position: relative;
   }
 
-  @media (min-width: @screen-sm) {
+  @media (min-width: $screen-sm) {
     .navbar-brand {
       display: none;
     }
@@ -164,7 +163,7 @@ img {
   }
 
   h1 {
-    .text-hide;
+    @include text-hide;
     margin: 0;
     position: absolute;
     top: 0;
@@ -206,7 +205,7 @@ img {
     text-transform: uppercase;
     font-size: 1.4em;
     width: 13em;
-    background-color: @grey;
+    background-color: $grey;
 
     &::before {
       content: " ";
@@ -217,7 +216,7 @@ img {
       left: 15px;
       right: 15px;
       height: 1px;
-      background-color: @borderGrey;
+      background-color: $border-grey;
     }
   }
 }
@@ -252,8 +251,8 @@ img {
 
 #calendar {
   .fc-event {
-    background-color: @red;
-    border-color: @red;
+    background-color: $red;
+    border-color: $red;
     font-size: 0.8em;
   }
 
@@ -302,14 +301,14 @@ img {
       }
 
       h1 {
-        color: @red;
+        color: $red;
         text-decoration: underline;
         font-size: 1em;
         font-weight: normal;
         cursor: pointer;
 
         &:hover {
-          color: @darkRed;
+          color: $dark-red;
         }
 
         &::after {
@@ -324,12 +323,12 @@ img {
 ================================================== */
 
 .gallery {
-  @thumbsAcross: 6;
-  @thumbMargin: 2px;
-  @thumbWidth: 100%/@thumbsAcross;
+  $thumbs-across: 6;
+  $thumb-margin: 2px;
+  $thumb-width: 100%/$thumbs-across;
 
-  .clearfix;
-  margin: -@thumbMargin;
+  @include clearfix;
+  margin: -$thumb-margin;
 
   a {
     position: relative;
@@ -337,14 +336,14 @@ img {
     float: left;
     overflow: hidden;
     background-color: rgba(0,0,0,0.1);
-    border: @thumbMargin solid white;
+    border: $thumb-margin solid white;
 
-    width: @thumbWidth;
-    padding-bottom: @thumbWidth;
+    width: $thumb-width;
+    padding-bottom: $thumb-width;
 
-    @media (max-width: @screen-sm) {
-      width: @thumbWidth*2;
-      padding-bottom: @thumbWidth*2;
+    @media (max-width: $screen-sm) {
+      width: $thumb-width*2;
+      padding-bottom: $thumb-width*2;
     }
 
     &:hover, &:focus {
@@ -370,7 +369,7 @@ img {
 
 #contact {
   #new_subscription_email {
-    @media (min-width: @screen-sm) {
+    @media (min-width: $screen-sm) {
       .form-group {
         width: 35%;
 
@@ -385,7 +384,7 @@ img {
       }
     }
 
-    @media (min-width: @screen-md) {
+    @media (min-width: $screen-md) {
       .form-group { width: 39%; }
       .btn { width: 20%; }
     }
@@ -404,7 +403,7 @@ img {
 ================================================== */
 
 .footer {
-  border-top: 1px solid @borderGrey;
+  border-top: 1px solid $border-grey;
   box-shadow: inset 0 1px 0 white;
   padding-top: 1em;
   height: 100px;
@@ -417,15 +416,15 @@ img {
     display: block;
     margin-bottom: 0.5em;
     font-size: 0.9em;
-    color: @lightText;
+    color: $light-text;
 
-    @media (max-width: @screen-sm) {
+    @media (max-width: $screen-sm) {
       text-align: center;
     }
   }
 
   .samrayner {
-    .text-hide;
+    @include text-hide;
     display: inline-block;
     overflow: hidden;
     vertical-align: top;
