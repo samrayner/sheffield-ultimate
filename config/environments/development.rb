@@ -27,5 +27,5 @@ SheffieldUltimate::Application.configure do
   # number of complex assets.
   config.assets.debug = true
 
-  config.action_mailer.delivery_method = :letter_opener
+  config.action_mailer.preview_path = "#{Rails.root}/spec/mailers/previews"
 end

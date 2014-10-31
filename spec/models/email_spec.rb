@@ -27,7 +27,7 @@ describe Email do
   end
 
   describe "#submit" do
-    it "sends an email to EH" do
+    it "sends an email" do
       FactoryGirl.build(:email).submit
       expect(ActionMailer::Base.deliveries.last.subject).to eq("Message From Website Contact Form")
     end

@@ -49,7 +49,7 @@ describe EmailsController do
       end
 
       it "renders the email" do
-        expect(response).to render_template("contact_mailer/contact_email")
+        expect(response).to render_template("contact_mailer/contact")
       end
 
       it "redirects to the contact page" do

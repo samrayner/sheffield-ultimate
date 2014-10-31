@@ -13,7 +13,8 @@ gem 'haml-rails'
 gem 'autoprefixer-rails'
 gem 'bootstrap_form'
 gem 'valid_email'
-gem 'fullcalendar-rails', '2.0.2.0'
+gem 'momentjs-rails'
+gem 'fullcalendar-rails', '~> 2.1'
 gem 'fancybox2-rails'
 gem 'figaro'
 gem 'paperclip'
@@ -24,10 +25,6 @@ group :test, :development do
   gem 'factory_girl_rails', '~> 4.4'
   gem 'simplecov', require: false
   gem 'rspec-rails', '~> 3.0'
-end
-
-group :development do
-  gem 'letter_opener'
 end
 
 group :test do

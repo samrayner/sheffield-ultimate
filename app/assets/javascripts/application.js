@@ -13,8 +13,9 @@
 //= require jquery
 //= require jquery_ujs
 //= require bootstrap
+//= require moment
 //= require fullcalendar
-//= require gcal
+//= require fullcalendar/gcal
 //= require fancybox
 //= require vendor_javascripts
 //= require_tree .

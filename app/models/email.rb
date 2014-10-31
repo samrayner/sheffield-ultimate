@@ -8,6 +8,6 @@ class Email < Tableless
   validates_absence_of :first_name
 
   def submit
-    ContactMailer.contact_email(self).deliver
+    ContactMailer.contact(self).deliver
   end
 end

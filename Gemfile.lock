@@ -29,7 +29,6 @@ GEM
       minitest (~> 5.1)
       thread_safe (~> 0.1)
       tzinfo (~> 1.1)
-    addressable (2.3.6)
     airbrake (4.1.0)
       builder
       multi_json
@@ -95,7 +94,9 @@ GEM
       railties (>= 3.1.0, < 5.0)
     figaro (1.0.0)
       thor (~> 0.14)
-    fullcalendar-rails (2.0.2.0)
+    fullcalendar-rails (2.1.1.0)
+      jquery-rails (>= 3.1.1, < 5.0.0)
+      momentjs-rails (~> 2.8, >= 2.8.3)
     haml (4.0.5)
       tilt
     haml-rails (0.5.3)
@@ -115,15 +116,13 @@ GEM
       actionpack (>= 3.0.0)
       activesupport (>= 3.0.0)
     kramdown (1.5.0)
-    launchy (2.4.2)
-      addressable (~> 2.3)
-    letter_opener (1.2.0)
-      launchy (~> 2.2)
     mail (2.6.1)
       mime-types (>= 1.16, < 3)
     mime-types (2.4.3)
     mini_portile (0.6.0)
     minitest (5.4.2)
+    momentjs-rails (2.8.3)
+      railties (>= 3.1)
     multi_json (1.10.1)
     nokogiri (1.6.3.1)
       mini_portile (= 0.6.0)
@@ -189,7 +188,7 @@ GEM
       multi_json (~> 1.0)
       simplecov-html (~> 0.8.0)
     simplecov-html (0.8.0)
-    sprockets (2.11.0)
+    sprockets (2.11.3)
       hike (~> 1.2)
       multi_json (~> 1.0)
       rack (~> 1.0)
@@ -232,10 +231,10 @@ DEPENDENCIES
   factory_girl_rails (~> 4.4)
   fancybox2-rails
   figaro
-  fullcalendar-rails (= 2.0.2.0)
+  fullcalendar-rails (~> 2.1)
   haml-rails
   jquery-rails
-  letter_opener
+  momentjs-rails
   paperclip
   pg
   rails (= 4.1.6)

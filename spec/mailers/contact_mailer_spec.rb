@@ -2,9 +2,9 @@ require 'rails_helper'
 
 describe ContactMailer do
   let(:email)  { FactoryGirl.build(:email) }
-  let(:mailer) { ContactMailer.contact_email(email) }
+  let(:mailer) { ContactMailer.contact(email) }
 
-  describe "#contact_email" do
+  describe "#contact" do
     it "sends to the correct address" do
       expect(mailer.to).to eq(["info@sheffieldultimate.co.uk"])
     end
