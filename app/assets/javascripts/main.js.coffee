@@ -25,8 +25,10 @@ class Lightbox
 
 class Calendar
   @init: ->
-    $('#fullcalendar').html("").fullCalendar
-      events: 'https://www.google.com/calendar/feeds/shefultimate%40gmail.com/public/basic'
+    $placeholder = $('#fullcalendar')
+    feedUrl = $placeholder.data("feed")
+    $placeholder.html("").fullCalendar
+      events: feedUrl
       firstDay: 1
       timeFormat: 'h(:mm)a'
       eventRender: (event, element) ->
