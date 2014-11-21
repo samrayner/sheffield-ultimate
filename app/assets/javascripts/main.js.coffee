@@ -26,21 +26,23 @@ class Lightbox
 class Calendar
   @init: ->
     $placeholder = $('#fullcalendar')
-    feedUrl = $placeholder.data("feed")
+    calId = $placeholder.data("calendar-id")
     $placeholder.html("").fullCalendar
-      events: feedUrl
+      googleCalendarApiKey: "AIzaSyCaiegXWqtrKqG4rDT9odrd-NyFKEc8MV8"
+      events:
+        googleCalendarId: calId
       firstDay: 1
       timeFormat: 'h(:mm)a'
       eventRender: (event, element) ->
-        if event.location.length
+        if event.location && event.location.length
           element.tooltip(title: event.location, container: "body")
         return
       eventClick: (event) ->
-        if event.description.indexOf("http") == 0
+        if event.description && event.description.indexOf("http") == 0
           window.open(event.description)
           return false
 
-        if event.location.length
+        if event.location && event.location.length
           window.open("https://www.google.co.uk/maps/preview?q="+encodeURIComponent(event.location))
           return false
 
