@@ -84,8 +84,8 @@ a:hover, a:focus, a:active, a:visited {
 }
 
 iframe {
-  width: 100%;
   border: none;
+  max-width: 100%;
 }
 
 img {

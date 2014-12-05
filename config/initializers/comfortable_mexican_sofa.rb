@@ -2,18 +2,24 @@
 
 ComfortableMexicanSofa.configure do |config|
   # Title of the admin area
-  #   config.cms_title = 'ComfortableMexicanSofa CMS Engine'
   config.cms_title = "Steal CMS Admin"
+
+  # Controller that is inherited from CmsAdmin::BaseController
+  #   config.base_controller = 'ApplicationController'
 
   # Module responsible for authentication. You can replace it with your own.
   # It simply needs to have #authenticate method. See http_auth.rb for reference.
-  #   config.admin_auth = 'ComfortableMexicanSofa::HttpAuth'
+  #   config.admin_auth = 'ComfyAdminAuthentication'
+
+  # Module responsible for authorization on admin side. It should have #authorize
+  # method that returns true or false based on params and loaded instance
+  # variables available for a given controller.
+  #   config.admin_authorization = 'ComfyAdminAuthorization'
 
   # Module responsible for public authentication. Similar to the above. You also
   # will have access to @cms_site, @cms_layout, @cms_page so you can use them in
   # your logic. Default module doesn't do anything.
-  #   config.public_auth = 'ComfortableMexicanSofa::DummyAuth'
-  config.public_auth = "StealAuth"
+  config.public_auth = 'ComfyPublicAuthentication'
 
   # When arriving at /cms-admin you may chose to redirect to arbirtary path,
   # for example '/cms-admin/users'
@@ -59,11 +65,6 @@ ComfortableMexicanSofa.configure do |config|
   # force it to English by setting this to `:en`
   #   config.admin_locale = nil
 
-  # If you want to keep your CMS tables in a location other than the default database
-  # add a database_config. For example, setting it to 'cms' will look for a cms_#{Rails.env}
-  # definition in your database.yml file
-  #   config.database_config = nil
-
   # A class that is included as a sweeper to admin base controller if it's set
   #   config.admin_cache_sweeper = nil
 
@@ -87,14 +88,34 @@ ComfortableMexicanSofa.configure do |config|
   # Default is nil (not used)
   #   config.hostname_aliases = nil
 
+  # Reveal partials that can be overwritten in the admin area.
+  # Default is false.
+  #   config.reveal_cms_partials = false
+
 end
 
-# Default credentials for ComfortableMexicanSofa::HttpAuth
+# Default credentials for ComfortableMexicanSofa::AccessControl::AdminAuthentication
 # YOU REALLY WANT TO CHANGE THIS BEFORE PUTTING YOUR SITE LIVE
-ComfortableMexicanSofa::HttpAuth.username = ENV["ADMIN_USERNAME"]
-ComfortableMexicanSofa::HttpAuth.password = ENV["ADMIN_PASSWORD"]
+ComfortableMexicanSofa::AccessControl::AdminAuthentication.username = ENV["ADMIN_USERNAME"]
+ComfortableMexicanSofa::AccessControl::AdminAuthentication.password = ENV["ADMIN_PASSWORD"]
 
-module StealAuth
+# Uncomment this module and `config.admin_auth` above to use custom admin authentication
+# module ComfyAdminAuthentication
+#   def authenticate
+#     return true
+#   end
+# end
+
+# Uncomment this module and `config.admin_authorization` above to use custom admin authorization
+# module ComfyAdminAuthorization
+#   def authorize
+#     return true
+#   end
+# end
+
+# Uncomment this module and `config.public_auth` above to use custom public authentication
+
+module ComfyPublicAuthentication
   def authenticate
     protected_paths = ["playbook"]
     return unless protected_paths.member?(params["cms_path"])
@@ -103,10 +124,3 @@ module StealAuth
     end
   end
 end
-
-# If you need to inject some html in cms admin views you can define what partial
-# should be rendered into the following areas:
-#   ComfortableMexicanSofa::ViewHooks.add(:header, '/layouts/admin/header')
-#   ComfortableMexicanSofa::ViewHooks.add(:navigation, '/layouts/admin/navigation')
-#   ComfortableMexicanSofa::ViewHooks.add(:html_head, '/layouts/admin/html_head')
-#   ComfortableMexicanSofa::ViewHooks.add(:page_form, '/layouts/admin/page_form')
