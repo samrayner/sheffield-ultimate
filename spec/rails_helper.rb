@@ -20,7 +20,7 @@ end
 
 def import_fixtures(site_identifier)
   FactoryGirl.create(:cms_site, identifier: site_identifier)
-  ComfortableMexicanSofa::Fixture::Importer.new(site_identifier, site_identifier, :force).import!
+  ComfortableMexicanSofa::Fixture::Importer.new("#{site_identifier}-spec", site_identifier, :force).import!
 end
 
 def delete_all_cms_data
